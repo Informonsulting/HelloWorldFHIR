@@ -65,10 +65,18 @@ print('___________________')
 print(a)
 print('___________________')
 id = '128844'
+
 print(requests.get(FHIR_URL+'/'+id).json())
+print('_____UPDATE____')
+
 update(id)
 print(requests.get(FHIR_URL+'/'+id).json())
 
+print('_____DELETE____')
+
 r = requests.delete(FHIR_URL+'/'+id)
+
+print('_____AFTER_DELETE____')
+print(requests.get(FHIR_URL+'/'+id).json())
 
 #print(list()
