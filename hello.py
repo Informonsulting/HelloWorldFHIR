@@ -36,9 +36,39 @@ def create():
     r.headers = {'Accept': 'application/json+fhir', "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
     return r.json()
 
-print(create())
+def update(id):
+    data = {
+        "resourceType": "Patient",
+        "name": [
+            {
+                "family": [
+                    "HELLO"
+                ],
+                "given": [
+                    "WORLD",
+                    "F"
+                ]
+            }
+        ],
+        "gender": "unknown",
+        "birthDate": "1942-01-28",
+        "deceasedBoolean": False
+    }
 
-print(requests.get(FHIR_URL+'/128808').json())
-r = requests.delete(FHIR_URL+'/128808')
+    r = requests.put(FHIR_URL+'/'+id, json.dumps(data))
+    r.headers = {'Accept': 'application/json+fhir', "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
+    return r.json()
+
+a = create()
+
+print('___________________')
+print(a)
+print('___________________')
+id = '128844'
+print(requests.get(FHIR_URL+'/'+id).json())
+update(id)
+print(requests.get(FHIR_URL+'/'+id).json())
+
+r = requests.delete(FHIR_URL+'/'+id)
 
 #print(list()
